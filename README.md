@@ -28,4 +28,5 @@ Ez a projekt egy egyszerű, Angular alapú regisztrációs űrlap, amely a moder
 
 ---
 
-## 📁 Projekt felépítése
+
+
