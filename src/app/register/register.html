@@ -1,0 +1,120 @@
+<div class="register-page">
+  <div class="register-card">
+    <h1 class="title">Regisztráció</h1>
+    <p class="subtitle">
+      Hozz létre egy fiókot, töltsd ki az alábbi mezőket.
+    </p>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+
+      
+      <div class="form-group">
+        <label for="username">Felhasználónév</label>
+        <input
+          id="username"
+          type="text"
+          formControlName="username"
+          [class.invalid]="registerForm.get('username')?.touched && registerForm.get('username')?.invalid"
+        />
+        <div class="error"
+             *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid">
+          <div *ngIf="registerForm.get('username')?.errors?.['required']">
+            A felhasználónév kötelező.
+          </div>
+          <div *ngIf="registerForm.get('username')?.errors?.['minlength']">
+            Minimum 4 karakter legyen.
+          </div>
+          <div *ngIf="registerForm.get('username')?.errors?.['forbiddenName']">
+            A felhasználónév nem tartalmazhatja az "admin" szót.
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          [class.invalid]="registerForm.get('email')?.touched && registerForm.get('email')?.invalid"
+        />
+        <div class="error"
+             *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
+          <div *ngIf="registerForm.get('email')?.errors?.['required']">
+            Az e-mail kötelező.
+          </div>
+          <div *ngIf="registerForm.get('email')?.errors?.['email']">
+            Érvényes e-mail címet adj meg.
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="form-group">
+        <label for="password">Jelszó</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          [class.invalid]="registerForm.get('password')?.touched && registerForm.get('password')?.invalid"
+        />
+        <div class="error"
+             *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
+          <div *ngIf="registerForm.get('password')?.errors?.['required']">
+            A jelszó kötelező.
+          </div>
+          <div *ngIf="registerForm.get('password')?.errors?.['minlength']">
+            Minimum 6 karakter legyen.
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="form-group">
+        <label for="confirmPassword">Jelszó megerősítése</label>
+        <input
+          id="confirmPassword"
+          type="password"
+          formControlName="confirmPassword"
+          [class.invalid]="
+            registerForm.get('confirmPassword')?.touched &&
+            (registerForm.get('confirmPassword')?.invalid || registerForm.errors?.['passwordMismatch'])
+          "
+        />
+        <div class="error"
+             *ngIf="
+               registerForm.get('confirmPassword')?.touched &&
+               (registerForm.get('confirmPassword')?.invalid || registerForm.errors?.['passwordMismatch'])
+             ">
+          <div *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">
+            A jelszó megerősítése kötelező.
+          </div>
+          <div *ngIf="registerForm.errors?.['passwordMismatch']">
+            A két jelszó nem egyezik.
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="form-group terms-group">
+        <label class="checkbox-label">
+          <input
+            type="checkbox"
+            formControlName="terms"
+            [class.invalid]="registerForm.get('terms')?.touched && registerForm.get('terms')?.invalid"
+          />
+          <span>Elfogadom a felhasználási feltételeket</span>
+        </label>
+        <div class="error"
+             *ngIf="registerForm.get('terms')?.touched && registerForm.get('terms')?.invalid">
+          A feltételeket kötelező elfogadni.
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="registerForm.invalid">
+        Regisztráció
+      </button>
+    </form>
+  </div>
+</div>
